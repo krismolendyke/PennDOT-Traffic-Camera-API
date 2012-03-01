@@ -50,7 +50,8 @@ class RequestHandler(BaseHTTPRequestHandler):
             return
 
         pdc = PennDOTCameras()
-        response = json.dumps(pdc.getCamerasNear(lat, lng, num))
+        response = json.dumps(pdc.getCamerasNear(lat, lng, num),
+                              separators=(',',':'))
 
         query = urlparse.parse_qs(split_path.query)
         if "callback" in query:
