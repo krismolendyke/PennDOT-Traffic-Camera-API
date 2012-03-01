@@ -46,7 +46,7 @@ One will be created for you now from the versioned data dump at:
     server = subprocess.Popen(["./server.py"])
     httpd = SocketServer.TCPServer(("", 8000), SimpleHTTPRequestHandler)
     if mongod.returncode is None and server.returncode is None:
-        print_box("""Servers are up and running!  Visit the follow URLs to see them in action:
+        print_box("""Servers are up and running!  Visit these URLs to see them in action:
 
     http://localhost:8000
     http://localhost:1776/39.875833/-75.348917/2
