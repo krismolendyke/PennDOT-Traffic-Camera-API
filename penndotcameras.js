@@ -46,7 +46,6 @@ var pennDotCameras = function(url) {
     init();
 
     return {
-        'init': init,
         'getCameras': getCameras
     };
 };

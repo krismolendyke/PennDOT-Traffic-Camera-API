@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Simple server for PennDOT camera data."""
+"""A simple HTTP server for PennDOT camera data."""
 
 from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
 from penndotcameras import PennDOTCameras
@@ -9,9 +9,25 @@ import json
 import urlparse
 
 class RequestHandler(BaseHTTPRequestHandler):
-    """docstring for RequestHandler"""
+    """Handle GET requests for PennDOT traffic cameras."""
 
     def do_GET(self):
+        """Get JSON/P describing cameras near a given location.
+
+        The request URL path must be of the form:
+
+            /lat/lng/num
+
+        Where lat and lng are valid floats and num is a valid int.  If that is
+        the case, a list of cameras sorted by ascending distance from the
+        given location, of a maximum length of num, will be returned as JSON.
+
+        If the request URL is specified with a query string parameter of:
+
+            callback=callbackFunctionName
+
+        The response will be returned as JSONP using callbackFunctionName.
+        """
         split_path = urlparse.urlsplit(self.path)
         path = split_path.path.split("/")[1:]
 
@@ -24,7 +40,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         try:
             lat = float(path[0])
             lng = float(path[1])
-            num = float(path[2])
+            num = int(path[2])
         except Exception:
             self.send_response(400)
             self.end_headers()
