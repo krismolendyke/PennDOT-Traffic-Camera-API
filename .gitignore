@@ -1,0 +1,3 @@
+data/db
+mongod.lock
+*.pyc
