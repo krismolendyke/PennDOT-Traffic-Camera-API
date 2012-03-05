@@ -1,4 +1,4 @@
-#!/bin/sh/env python
+#!/usr/bin/env python
 
 """Run all of the servers required to use PennDOT cameras locally.
 
